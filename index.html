@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Load required Bootstrap and BootstrapVue CSS -->
+  <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+
+  <!-- Load polyfills to support older browsers -->
+  <script src="http://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"
+    crossorigin="anonymous"></script>
+
+  <!-- Load Vue followed by BootstrapVue -->
+  <script src="http://unpkg.com/vue@latest/dist/vue.min.js"></script>
+  <script src="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+  <!-- Load the following for BootstrapVueIcons support -->
+  <script src="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+
+  <title>Shopping List App</title>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col"></div>
+
+        <div class="col">
+          <b-card title="Shopping List" style="text-align:center; margin-bottom: 5vh; margin-top: 10vh;">
+            <input type="text" placeholder="Add an item..." style="height: 4.8vh; margin-bottom: 4vh;" v-model="item">
+            <b-button variant="outline-primary" v-on:Click="addItem">Submit</b-button>
+            <b-card style="text-align: center;" v-for="product, index in list" v-if="list.length > 0">
+              <b-card-title>{{product}}</b-card-title>
+              <b-button variant="outline-success" v-on:Click="removeItem(index)">Purchased</b-button>
+              <b-button variant="outline-danger" v-on:Click="removeItem(index)">Remove</b-button>
+            </b-card>
+          </b-card>
+        </div>
+
+        <div class="col"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    var app = new Vue({
+      el: '#app',
+
+      data: {
+        item: "",
+        list: [
+
+        ],
+      },
+
+      methods: {
+        addItem() {
+          this.list.push(this.item);
+          this.item = "";
+        },
+        removeItem(index) {
+          this.$delete(this.list, index);
+        },
+      },
+
+    });
+
+  </script>
+
+</body>
+
+</html>
